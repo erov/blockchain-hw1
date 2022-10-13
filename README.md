@@ -44,8 +44,8 @@
 - 47:       /// @notice Request dividends for current account.
 + 47:       function payWithComment(uint256 value, string message) external payable {
 + 48:           if (value > 0) {
-+ 49:               emit Deposit(msg.sender, msg.value, message);
-+ 50:               m_totalDividends += msg.value;
++ 49:               emit Deposit(msg.sender, value, message);
++ 50:               m_totalDividends += value;
 + 51:           }
 + 52:       }
 + 53:      

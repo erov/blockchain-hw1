@@ -44,10 +44,10 @@
 + 41:           assert(msg.value == 0); // like in task 2, maybe we wonna have here a message like "DividendToken: to make payment use payWithComment(string) function"
 
 - 47:       /// @notice Request dividends for current account.
-+ 47:       function payWithComment(uint256 value, string message) external payable {
-+ 48:           if (value > 0) {
-+ 49:               emit Deposit(msg.sender, value, message);
-+ 50:               m_totalDividends += value;
++ 47:       function payWithComment(string message) external payable {
++ 48:           if (msg.value > 0) {
++ 49:               emit Deposit(msg.sender, msg.value, message);
++ 50:               m_totalDividends += msg.value;
 + 51:           }
 + 52:       }
 + 53:      

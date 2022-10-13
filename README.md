@@ -27,3 +27,27 @@
 + 212:      require(2 days <= dayInWeek && dayInWeek < 3 days, "ERC20: Cannot execute token transaction in unix epoch Saturday");
 + 213:      
 ```
+
+## Задание 3
+> https://github.com/mixbytes/solidity/blob/076551041c420b355ebab40c24442ccc7be7a14a/contracts/token/DividendToken.sol - сделать чтобы платеж в ETH принимался только специальной функцией, принимающей помимо ETH еще комментарий к платежу (bytes[32]). Простая отправка ETH в контракт запрещена
+
+```
+- 21:       event Deposit(address indexed sender, uint256 value);
++ 21:       event Deposit(address indexed sender, uint256 value, string message);
+
+- 41:           if (msg.value > 0) {
+- 42:               emit Deposit(msg.sender, msg.value);
+- 43:               m_totalDividends = m_totalDividends.add(msg.value);
+- 44:           }
++ 41:           assert(msg.value == 0); // like in task 2, maybe we wonna have here a message like "DividendToken: to make payment use payWithComment(string) function"
+
+- 47:       /// @notice Request dividends for current account.
++ 47:       function payWithComment(uint256 value, string message) external payable {
++ 48:           if (value > 0) {
++ 49:               emit Deposit(msg.sender, msg.value, message);
++ 50:               m_totalDividends += msg.value;
++ 51:           }
++ 52:       }
++ 53:      
++ 54:       /// @notice Request dividends for current account.
+```
